@@ -1,13 +1,21 @@
-﻿@model List<User>
+﻿@model UserApiResponse
 
 <div class="container mx-auto px-4 flex justify-center items-center">
     <div>
         <h1 class="text-4xl font-bold text-gray-800 text-center">Pronto para os estudos? Então bora!</h1>
     </div>
 
-        
-    @foreach(var user in Model)
-    {
-        @user.email
-    }
+</div>
+
+<div class="container mx-auto px-4 flex justify-center">
+    
+    <div class="mt-5 justify-center">
+        <p class="text-2xl text-gray-800">Contas disponíveis: </p>
+        @foreach (var user in Model.data)
+        {
+           <p class="text-lg text-gray-600"> - @user.email</p> 
+
+        }
+
+    </div>
 </div>

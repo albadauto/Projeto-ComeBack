@@ -1,5 +1,7 @@
 ﻿using ComeBack.API.DAO;
 using ComeBack.API.Repository.Interface;
+using ComeBack.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,8 +36,9 @@ namespace ComeBack.API.Controllers
         [HttpGet("/User/GetAllUsers")]
         public async Task<ActionResult<List<UserDAO>>> GetAllUsers()
         {
+            var token = TokenService.GenerateToken(new UserDAO {  name = "Jose", email = "joseadauto923@gmail.com", password = "root" });
             var data = await _repository.GetAllUsers();
-            return Ok(data);
+            return Ok(new { data, token = token});
         }
     }
 }
