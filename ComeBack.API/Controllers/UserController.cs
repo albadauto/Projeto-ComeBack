@@ -35,7 +35,7 @@ namespace ComeBack.API.Controllers
         public async Task<ActionResult<List<UserDAO>>> GetAllUsers()
         {
             var data = await _repository.GetAllUsers();
-            return Ok(new { all = data, success = true });
+            return Ok(data);
         }
     }
 }
