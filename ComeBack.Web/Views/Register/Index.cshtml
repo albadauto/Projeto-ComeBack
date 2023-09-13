@@ -1,0 +1,38 @@
+﻿@model User
+<div class="container mx-auto px-4">
+    @using(Html.BeginForm("InsertUser", "Register", FormMethod.Post)){
+    <div class="flex justify-center mb-5">
+        <h1 class="text-4xl font-bold text-gray-800">Registro de usuário</h1>
+    </div>
+
+    <div class="flex justify-center mb-5">
+        <p class="text-gray-600 items-center text-md">Registre-se no site só de zoas para acompanhar sei lá o que KKKK</p>
+
+    </div>
+    <div class="grid grid-cols-2 gap-4 flex justify-center">
+        <input class="bg-gray-200 shadow-lg px-2 py-3" type="text" placeholder="Nome" asp-for="name"/>
+        <input class="bg-gray-200 shadow-lg px-2 py-3" placeholder="Email" asp-for="email"/>
+    </div>
+
+
+    <div class="grid grid-cols-2 gap-4 flex justify-center mt-5">
+        <input class="bg-gray-200 shadow-lg px-2 py-3" type="text" placeholder="Senha" asp-for="password"/>
+        <input class="bg-gray-200 shadow-lg px-2 py-3" type="text" placeholder="Repita a senha" />
+
+    </div>
+
+    <div class="mt-5 flex justify-center">
+        <button class="bg-gray-900 text-white px-6 py-2 font-bold rounded-md hover:bg-gray-700 transition-all" type="submit">Registrar</button>
+        <button class="bg-blue-900 text-white px-6 py-2 font-bold rounded-md ml-2 hover:bg-blue-700 transition-all">Voltar</button>
+
+    </div>
+    }
+
+    @if(TempData["success"] != null)
+    {
+        <div class="flex justify-center mt-5">
+            <p class="text-md text-green-900">@TempData["success"]</p>
+        </div>
+    }
+
+</div>

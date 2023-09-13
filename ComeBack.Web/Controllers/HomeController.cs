@@ -25,8 +25,6 @@ namespace ComeBack.Web.Controllers
             var response = await factory.GetAsync(apiUrl);
             var result = await response.Content.ReadAsStringAsync();
             var listOfUsers = JsonConvert.DeserializeObject<UserApiResponse>(result);
-      
-
             return View(listOfUsers);
         }
 
