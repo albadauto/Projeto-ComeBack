@@ -10,7 +10,7 @@ namespace ComeBack.API.Services
     public static class TokenService
     {
        
-        public static string GenerateToken(UserDAO user)
+        public static string GenerateToken(LoginDAO user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -18,7 +18,7 @@ namespace ComeBack.API.Services
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, user.name.ToString()),
+                    new Claim(ClaimTypes.Email, user.email.ToString()),
 
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),

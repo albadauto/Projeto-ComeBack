@@ -36,9 +36,24 @@ namespace ComeBack.API.Controllers
         [HttpGet("/User/GetAllUsers")]
         public async Task<ActionResult<List<UserDAO>>> GetAllUsers()
         {
-            var token = TokenService.GenerateToken(new UserDAO {  name = "Jose", email = "joseadauto923@gmail.com", password = "root" });
             var data = await _repository.GetAllUsers();
-            return Ok(new { data, token = token});
+            return Ok(new { data });
+        }
+
+        [HttpPost("/User/Login")]
+        public async Task<ActionResult> LoginUser([FromBody] LoginDAO dao)
+        {
+            var search = await _repository.SearchUser(dao);
+            if(search != null)
+            {
+                if (BCrypt.Net.BCrypt.Verify(dao.password, search.password))
+                {
+                    var token = TokenService.GenerateToken(dao);
+                    return Ok(new { isLogged = true, token = token });
+                }
+            }
+
+            return BadRequest(new { isLogged = false });
         }
     }
 }

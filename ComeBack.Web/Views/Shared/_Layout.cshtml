@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor context
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,6 +20,12 @@
                 <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Sobre</li>
                 <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Ajuda</li>
                 <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white"><a asp-controller="Register" asp-action="Index">Registrar</a></li>
+                @if(context.HttpContext.Session.GetString("token") == null)
+                {
+                    <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white"><a asp-controller="Login" asp-action="Index">Login</a></li>
+
+                }
+
 
            </ul>
        </div>

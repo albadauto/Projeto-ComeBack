@@ -6,6 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddSession(o =>
+{
+    o.Cookie.IsEssential = true;
+    o.IdleTimeout = TimeSpan.FromSeconds(10);
+    o.Cookie.HttpOnly = true;
+});
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<IUserService, UserService>();
 var app = builder.Build();
 
@@ -23,6 +30,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -1,6 +1,7 @@
 ﻿using BCrypt.Net;
 using ComeBack.Web.Models;
 using ComeBack.Web.Services.Interface;
+using Newtonsoft.Json;
 
 namespace ComeBack.Web.Services
 {
@@ -18,13 +19,21 @@ namespace ComeBack.Web.Services
 
         public async Task<bool> InsertNewUser(User user)
         {
-            user.password = BCrypt.Net.BCrypt.HashPassword(user.password);
             var factory = _httpClientFactory.CreateClient();
             var response = await factory.PostAsJsonAsync(apiUrl + "/api/User", user);
             if (response.IsSuccessStatusCode)
                 return true;
             else
                 return false;
+        }
+
+        public async Task<LoginApiResponse> LoginUser(User user)
+        {
+            var factory = _httpClientFactory.CreateClient();
+            var response = await factory.PostAsJsonAsync(apiUrl + "/User/Login", user);
+            var result = await response.Content.ReadAsStringAsync();
+            var final = JsonConvert.DeserializeObject<LoginApiResponse>(result);
+            return final;
         }
     }
 }

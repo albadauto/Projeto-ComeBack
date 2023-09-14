@@ -7,5 +7,7 @@ namespace ComeBack.API.Repository.Interface
         Task<UserDAO> InsertNewUser(UserDAO userDAO);
 
         Task<List<UserDAO>> GetAllUsers();
+
+        Task<LoginDAO> SearchUser(LoginDAO user);
     }
 }

@@ -26,9 +26,17 @@ namespace ComeBack.API.Repository
         public async Task<UserDAO> InsertNewUser(UserDAO userDAO)
         {
             var user = _mapper.Map<User>(userDAO);
+            user.password = BCrypt.Net.BCrypt.HashPassword(user.password);
             await _context.AddAsync(user);
             await _context.SaveChangesAsync();
             return _mapper.Map<UserDAO>(user); 
+        }
+
+        public async Task<LoginDAO> SearchUser(LoginDAO userDAO)
+        {
+            var user = _mapper.Map<User>(userDAO);
+            var result = await _context.Users.FirstOrDefaultAsync(x => x.email == user.email);
+            return _mapper.Map<LoginDAO>(result);
         }
     }
 }

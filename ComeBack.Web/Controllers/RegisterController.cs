@@ -19,9 +19,13 @@ namespace ComeBack.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertUser(User user)
         {
-            await _service.InsertNewUser(user);
-            TempData["success"] = "Usuário criado com sucesso";
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _service.InsertNewUser(user);
+                TempData["success"] = "Usuário criado com sucesso";
+                return RedirectToAction("Index");
+            }
+            return View("Index", user);
         }
     }
 }
