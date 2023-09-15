@@ -3,6 +3,7 @@ using ComeBack.API.Config;
 using ComeBack.API.Context;
 using ComeBack.API.Repository;
 using ComeBack.API.Repository.Interface;
+using ComeBack.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Database");
+byte[] key = Encoding.ASCII.GetBytes(Settings.Secret);
 builder.Services.AddControllers();
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
@@ -31,14 +33,10 @@ builder.Services.AddAuthentication(opt =>
 {
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration.GetValue<string>("jwt:issuer"),
-        ValidAudience = builder.Configuration.GetValue<string>("jwt:audience"),
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("jwt:secretKey"))),
-        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
     };
 });
 var app = builder.Build();

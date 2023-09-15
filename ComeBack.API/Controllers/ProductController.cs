@@ -1,6 +1,6 @@
 ﻿using ComeBack.API.DAO;
 using ComeBack.API.Repository.Interface;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComeBack.API.Controllers
@@ -15,6 +15,7 @@ namespace ComeBack.API.Controllers
              _productRepository = productRepository;
         }
 
+        [Authorize]
         [HttpPost("/product/insertnewproduct")]
         public async Task<ActionResult<ProductDAO>> InsertNewProduct([FromBody] ProductDAO dao)
         {
@@ -31,6 +32,7 @@ namespace ComeBack.API.Controllers
 
         }
 
+        [Authorize]
         [HttpGet("/product/getallproducts")]
         public async Task<ActionResult<List<ProductDAO>>> GetAllProducts()
         {
