@@ -16,16 +16,19 @@
            </div>
 
             <ul class="text-center flex space-x-4">
-                <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Sobre</li>
-                <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Ajuda</li>
-                <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white"><a asp-controller="Register" asp-action="Index">Registrar</a></li>
+                <a asp-controller="Home" asp-action="Index" class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Home</a>
+                <a class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Sobre</a>
+                <a class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Ajuda</a>
+                <a asp-controller="Register" asp-action="Index" class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Registrar</a>
                 @if(context.HttpContext.Session.GetString("token") == null)
                 {
-                    <li class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white"><a asp-controller="Login" asp-action="Index">Login</a></li>
-
+                    <a asp-controller="Login" asp-action="Index" class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Login</a>
                 }
+                else
 
+                {
+                    <a asp-controller="Login" asp-action="Logout" class="text-md font-bold hover:bg-gray-800 cursor-pointer px-3 py-2 text-gray-800 rounded-md transition-all hover:text-white">Sair</a>
+                }
 
            </ul>
        </div>

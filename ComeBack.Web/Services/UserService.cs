@@ -1,5 +1,4 @@
-﻿using BCrypt.Net;
-using ComeBack.Web.Models;
+﻿using ComeBack.Web.Models;
 using ComeBack.Web.Services.Interface;
 using Newtonsoft.Json;
 

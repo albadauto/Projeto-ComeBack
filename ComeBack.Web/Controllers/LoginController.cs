@@ -33,5 +33,13 @@ namespace ComeBack.Web.Controllers
             }
 
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("token");
+            return RedirectToAction("Index", "Home");
+
+        }
     }
 }

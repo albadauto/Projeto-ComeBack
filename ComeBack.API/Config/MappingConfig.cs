@@ -14,7 +14,8 @@ namespace ComeBack.API.Config
                 config.CreateMap<UserDAO, User>();
                 config.CreateMap<LoginDAO, User>();
                 config.CreateMap<User, LoginDAO>();
-
+                config.CreateMap<Product, ProductDAO>();
+                config.CreateMap<ProductDAO, Product>();
 
 
             });

@@ -21,7 +21,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(opt =>
 {
